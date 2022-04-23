@@ -10,12 +10,6 @@ import com.example.taskmanager.data.AppDatabase
 import com.example.taskmanager.data.Task
 
 class MainActivity : AppCompatActivity() {
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        setupActionBarWithNavController(findNavController(R.id.fragmentContainerView))
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
