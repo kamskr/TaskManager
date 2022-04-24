@@ -1,8 +1,10 @@
 package com.example.taskmanager.fragments.details
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -39,6 +41,17 @@ class DetailsFragment : Fragment() {
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).text = dateFormat.format(args.currentTask.deadline)
 
+
+        view.findViewById<Button>(R.id.shareTaskButton).setOnClickListener{
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, "I am ${args.currentTask.percentageDone}% done with this task!")
+                type = "text/plain"
+            }
+
+            val shareIntent = Intent.createChooser(sendIntent, null)
+            startActivity(shareIntent)
+        }
 
         return view
     }
