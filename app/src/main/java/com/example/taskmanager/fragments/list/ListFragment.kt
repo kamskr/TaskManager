@@ -23,13 +23,13 @@ class ListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_list, container, false)
+        mTaskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
 
-        val adapter = ListAdapter()
+        val adapter = ListAdapter(mTaskViewModel)
         val recyclerView = view.findViewById<RecyclerView>(R.id.rv_tasksList)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        mTaskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
         mTaskViewModel.readAllData.observe(this, Observer { tasks ->
             adapter.setData(tasks)
         })
