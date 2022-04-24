@@ -1,12 +1,11 @@
 package com.example.taskmanager.fragments.update
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.TextUtils
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -63,6 +62,9 @@ class UpdateFragment : Fragment() {
             updateItem(view)
         }
 
+        // Add menu
+        setHasOptionsMenu(true)
+
         return view
     }
     private fun updateLabel(editText: EditText, skipUpdateDate: Boolean) {
@@ -95,4 +97,27 @@ class UpdateFragment : Fragment() {
         return !(TextUtils.isEmpty(taskName))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.delete_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete) {
+            deleteTask()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun deleteTask() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Yes") { _, _ ->
+            mTaskViewModel.deleteTask(args.currentTask)
+            Toast.makeText(requireContext(), "Successfully deleted!", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
+        }
+        builder.setNegativeButton("No") { _, _ -> }
+        builder.setTitle("Delete task")
+        builder.setMessage("Are you sure you want to delete this task?")
+        builder.create().show()
+    }
 }
