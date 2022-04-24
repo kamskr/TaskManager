@@ -67,8 +67,10 @@ class UpdateFragment : Fragment() {
     private fun updateLabel(editText: EditText, skipUpdateDate: Boolean) {
         val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        editText.setText(dateFormat.format(myCalendar.time))
-        if(!skipUpdateDate) {
+        if(skipUpdateDate) {
+            editText.setText(dateFormat.format(deadline!!))
+        } else {
+            editText.setText(dateFormat.format(myCalendar.time))
             deadline = myCalendar.time
         }
     }

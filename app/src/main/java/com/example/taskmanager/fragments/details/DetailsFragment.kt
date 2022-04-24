@@ -3,6 +3,8 @@ package com.example.taskmanager.fragments.details
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +15,8 @@ import com.example.taskmanager.R
 import com.example.taskmanager.fragments.list.ListFragmentDirections
 import com.example.taskmanager.fragments.update.UpdateFragmentArgs
 import com.example.taskmanager.viewmodels.TaskViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailsFragment : Fragment() {
     private lateinit var mTaskViewModel: TaskViewModel
@@ -22,9 +26,19 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val view = inflater.inflate(R.layout.fragment_details, container, false)
         mTaskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
         setHasOptionsMenu(true)
-        return inflater.inflate(R.layout.fragment_details, container, false)
+
+        view.findViewById<TextView>(R.id.tv_taskDetailsTitle).setText(args.currentTask.name)
+        view.findViewById<TextView>(R.id.tv_taskDetailsPrio).setText(args.currentTask.priority.toString())
+        view.findViewById<TextView>(R.id.tv_taskDetailsEstimatedH).setText(args.currentTask.estimatedTimeInHours.toString())
+        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).setText(args.currentTask.deadline.toString())
+        val myFormat = "dd/MM/yy"
+        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).setText(dateFormat.format(args.currentTask.deadline))
+
+        return view
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
