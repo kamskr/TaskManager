@@ -86,6 +86,38 @@
             android:text="22.04.2022"
             android:textSize="18sp"
             />
+
     </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/circularProgressIndicatorPercentage"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:progress="50"
+            app:indicatorColor="@color/purple_500"
+            app:indicatorSize="150dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:trackColor="#e3e3e3" />
+
+        <TextView
+            android:id="@+id/percentageTextIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50%"
+            android:textSize="30sp"
+            app:layout_constraintBottom_toBottomOf="@+id/circularProgressIndicatorPercentage"
+            app:layout_constraintEnd_toEndOf="@+id/circularProgressIndicatorPercentage"
+            app:layout_constraintStart_toStartOf="@+id/circularProgressIndicatorPercentage"
+            app:layout_constraintTop_toTopOf="@+id/circularProgressIndicatorPercentage" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
 

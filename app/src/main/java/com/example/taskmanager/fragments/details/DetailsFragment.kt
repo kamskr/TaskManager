@@ -3,18 +3,16 @@ package com.example.taskmanager.fragments.details
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
-import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.taskmanager.R
-import com.example.taskmanager.fragments.list.ListFragmentDirections
 import com.example.taskmanager.fragments.update.UpdateFragmentArgs
 import com.example.taskmanager.viewmodels.TaskViewModel
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -30,13 +28,17 @@ class DetailsFragment : Fragment() {
         mTaskViewModel = ViewModelProvider(this)[TaskViewModel::class.java]
         setHasOptionsMenu(true)
 
-        view.findViewById<TextView>(R.id.tv_taskDetailsTitle).setText(args.currentTask.name)
-        view.findViewById<TextView>(R.id.tv_taskDetailsPrio).setText(args.currentTask.priority.toString())
-        view.findViewById<TextView>(R.id.tv_taskDetailsEstimatedH).setText(args.currentTask.estimatedTimeInHours.toString())
-        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).setText(args.currentTask.deadline.toString())
+        view.findViewById<TextView>(R.id.tv_taskDetailsTitle).text = args.currentTask.name
+        view.findViewById<TextView>(R.id.tv_taskDetailsPrio).text = args.currentTask.priority.toString()
+        view.findViewById<TextView>(R.id.tv_taskDetailsEstimatedH).text = args.currentTask.estimatedTimeInHours.toString()
+        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).text = args.currentTask.deadline.toString()
+        view.findViewById<CircularProgressIndicator>(R.id.circularProgressIndicatorPercentage).progress = args.currentTask.percentageDone
+        view.findViewById<TextView>(R.id.percentageTextIndicator).text = "${args.currentTask.percentageDone.toString()}%"
+
         val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
-        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).setText(dateFormat.format(args.currentTask.deadline))
+        view.findViewById<TextView>(R.id.tv_taskDetailsDeadline).text = dateFormat.format(args.currentTask.deadline)
+
 
         return view
     }
