@@ -2,7 +2,9 @@ package com.example.taskmanager.fragments.list
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
+import android.widget.Button
 import androidx.fragment.app.Fragment
 import android.widget.TextView
 import android.widget.Toast
@@ -38,10 +40,24 @@ class ListFragment : Fragment() {
             calendar.time = today;
             calendar.add(Calendar.DATE, 7);
             val weekFromNow = calendar.time;
+            val leftThisWeekText =view.findViewById<TextView>(R.id.tv_tasksLeftThisWeek)
+            val addTestDataButton = view.findViewById<Button>(R.id.fillDataButton)
+            val visibleTasks = tasks.filter{it.deadline > Date() }
 
-            adapter.setData(tasks.filter{it.deadline > Date() })
+            if(visibleTasks.isEmpty()) {
+                addTestDataButton.visibility = View.VISIBLE
+                leftThisWeekText.visibility = View.INVISIBLE
+                addTestDataButton.setOnClickListener{
+                    addTestData()
+                }
+            } else {
+                leftThisWeekText.visibility = View.VISIBLE
+                addTestDataButton.visibility = View.INVISIBLE
+            }
+
+            adapter.setData(visibleTasks)
             val tasksLeftThisWeek = tasks.filter{it.deadline >= Date() &&  it.deadline <= weekFromNow}
-            view.findViewById<TextView>(R.id.tv_tasksLeftThisWeek).text = "Tasks left this week: ${tasksLeftThisWeek.size}"
+            leftThisWeekText.text = "Tasks left this week: ${tasksLeftThisWeek.size}"
         })
 
 
@@ -52,6 +68,10 @@ class ListFragment : Fragment() {
         }
 
         return view
+    }
+
+    private fun addTestData() {
+        mTaskViewModel.addTestData()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

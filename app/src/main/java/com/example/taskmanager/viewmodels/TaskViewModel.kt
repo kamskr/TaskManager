@@ -43,4 +43,10 @@ class TaskViewModel(application: Application): AndroidViewModel(application) {
             taskRepository.deleteAllTasks()
         }
     }
+
+    fun addTestData() {
+        viewModelScope.launch(Dispatchers.IO) {
+            taskRepository.addTestData()
+        }
+    }
 }
