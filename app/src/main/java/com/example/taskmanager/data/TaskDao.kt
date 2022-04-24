@@ -2,6 +2,7 @@ package com.example.taskmanager.data
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.example.taskmanager.model.Task
 
 
 @Dao

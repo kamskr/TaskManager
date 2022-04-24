@@ -5,8 +5,8 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
 import com.example.taskmanager.data.AppDatabase
-import com.example.taskmanager.data.Task
-import com.example.taskmanager.data.TaskRepository
+import com.example.taskmanager.model.Task
+import com.example.taskmanager.repositories.TaskRepository
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 

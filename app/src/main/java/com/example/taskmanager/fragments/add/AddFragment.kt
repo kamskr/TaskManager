@@ -9,20 +9,17 @@ import android.widget.EditText
 import com.example.taskmanager.R
 import java.text.SimpleDateFormat
 import java.util.*
-import com.example.taskmanager.MainActivity
 
 import android.app.DatePickerDialog
 import android.app.DatePickerDialog.OnDateSetListener
 import android.text.TextUtils
 import android.widget.Button
 
-import android.widget.DatePicker
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.taskmanager.data.Task
+import com.example.taskmanager.model.Task
 import com.example.taskmanager.viewmodels.TaskViewModel
-import java.time.LocalDate
 
 
 class AddFragment : Fragment() {

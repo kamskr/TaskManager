@@ -5,9 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.example.taskmanager.data.Converters
-import com.example.taskmanager.data.Task
-import com.example.taskmanager.data.TaskDao
+import com.example.taskmanager.model.Task
 import com.example.taskmanager.utilities.DATABASE_NAME
 
 @Database(entities = [Task::class], version = 1)
