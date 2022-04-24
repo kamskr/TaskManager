@@ -34,13 +34,13 @@ class ListAdapter(private val mTaskViewModel: TaskViewModel): RecyclerView.Adapt
         val currentTask = taskList[position]
         holder.itemView.findViewById<TextView>(R.id.taskName_txt).text = currentTask.name.toString()
         holder.itemView.findViewById<TextView>(R.id.priority_txt).text = "PRIO: ${currentTask.priority.toString()}"
-        holder.itemView.findViewById<TextView>(R.id.percentageDone_txt).text = "${currentTask.percentageDone.toString()}%"
+        holder.itemView.findViewById<TextView>(R.id.percentageDone_txt).text = "Done: ${currentTask.percentageDone.toString()}%"
 
         val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         holder.itemView.findViewById<TextView>(R.id.tv_deadline).text = "Deadline: ${dateFormat.format(currentTask.deadline)}"
         holder.itemView.findViewById<ConstraintLayout>(R.id.cl_tasksList).setOnClickListener {
-            val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentTask)
+            val action = ListFragmentDirections.actionListFragmentToDetailsFragment(currentTask)
             holder.itemView.findNavController().navigate(action)
         }
         holder.itemView.findViewById<ConstraintLayout>(R.id.cl_tasksList).setOnLongClickListener() { _ ->

@@ -62,9 +62,6 @@ class UpdateFragment : Fragment() {
             updateItem(view)
         }
 
-        // Add menu
-        setHasOptionsMenu(true)
-
         return view
     }
     private fun updateLabel(editText: EditText, skipUpdateDate: Boolean) {
@@ -95,29 +92,5 @@ class UpdateFragment : Fragment() {
     }
     private fun inputCheck(taskName: String): Boolean{
         return !(TextUtils.isEmpty(taskName))
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.delete_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_delete) {
-            deleteTask()
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
-    private fun deleteTask() {
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Yes") { _, _ ->
-            mTaskViewModel.deleteTask(args.currentTask)
-            Toast.makeText(requireContext(), "Successfully deleted!", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_updateFragment_to_listFragment)
-        }
-        builder.setNegativeButton("No") { _, _ -> }
-        builder.setTitle("Delete task")
-        builder.setMessage("Are you sure you want to delete this task?")
-        builder.create().show()
     }
 }
