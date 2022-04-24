@@ -13,13 +13,9 @@ interface TaskDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun addTask(task: Task)
 
+    @Update
+    fun updateTask(task: Task)
+
     @Delete
     fun deleteTask(task: Task)
-
-//    @Query("SELECT * FROM task WHERE uid IN (:userIds)")
-//    fun loadAllByIds(taskIds: IntArray): List<Task>
-//
-//    @Query("SELECT * FROM task WHERE first_name LIKE :first AND " +
-//            "last_name LIKE :last LIMIT 1")
-//    fun findByName(first: String, last: String): User
 }
