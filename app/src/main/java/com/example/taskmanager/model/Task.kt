@@ -15,7 +15,7 @@ data class Task (
     @ColumnInfo(name = "name") val name: String,
     // The lower the number the most urgent it is
     @ColumnInfo(name = "priority") val priority: Int,
-    @ColumnInfo(name = "deadline") val deadline: Date?,
+    @ColumnInfo(name = "deadline") val deadline: Date,
     @Size(min=0, max=100)
     @ColumnInfo(name = "percentage_done") val percentageDone: Int,
     @Size(min=0)

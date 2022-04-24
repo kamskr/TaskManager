@@ -68,7 +68,7 @@ class UpdateFragment : Fragment() {
         return view
     }
     private fun updateLabel(editText: EditText, skipUpdateDate: Boolean) {
-        val myFormat = "MM/dd/yy"
+        val myFormat = "dd/MM/yy"
         val dateFormat = SimpleDateFormat(myFormat, Locale.US)
         editText.setText(dateFormat.format(myCalendar.time))
         if(!skipUpdateDate) {
@@ -83,7 +83,7 @@ class UpdateFragment : Fragment() {
         val estimatedTime = view.findViewById<EditText>(R.id.et_estimatedTime_update).text.toString().toInt()
 
         if(inputCheck(taskName)) {
-            val task = Task(args.currentTask.uid, taskName, priority, deadline, percentageDone, estimatedTime)
+            val task = Task(args.currentTask.uid, taskName, priority, deadline!!, percentageDone, estimatedTime)
             mTaskViewModel.updateTask(task)
             Toast.makeText(requireContext(), "Successfully updated!", Toast.LENGTH_SHORT).show()
 

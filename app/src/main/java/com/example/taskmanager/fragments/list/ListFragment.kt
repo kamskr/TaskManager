@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
 import com.example.taskmanager.viewmodels.TaskViewModel
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import java.util.*
 
 class ListFragment : Fragment() {
     private lateinit var mTaskViewModel: TaskViewModel
@@ -31,8 +32,20 @@ class ListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         mTaskViewModel.readAllData.observe(this, Observer { tasks ->
-            adapter.setData(tasks)
+            val today = Date();
+            val calendar = Calendar.getInstance();
+
+            calendar.time = today;
+            calendar.add(Calendar.DATE, 7);
+            val weekFromNow = calendar.time;
+
+            adapter.setData(tasks.filter{it.deadline > Date() })
+            val tasksLeftThisWeek = tasks.filter{it.deadline >= Date() &&  it.deadline <= weekFromNow}
+            view.findViewById<TextView>(R.id.tv_tasksLeftThisWeek).text = "Tasks left this week: ${tasksLeftThisWeek.size}"
         })
+
+
+
 
         view.findViewById<FloatingActionButton>(R.id.floatingActionButton).setOnClickListener{
             findNavController().navigate(R.id.action_listFragment_to_addFragment)

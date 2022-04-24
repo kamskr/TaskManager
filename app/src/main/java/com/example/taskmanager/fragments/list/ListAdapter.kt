@@ -17,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.taskmanager.R
 import com.example.taskmanager.model.Task
 import com.example.taskmanager.viewmodels.TaskViewModel
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ListAdapter(private val mTaskViewModel: TaskViewModel): RecyclerView.Adapter<ListAdapter.MyViewHolder>() {
     private var taskList = emptyList<Task>()
@@ -30,11 +32,13 @@ class ListAdapter(private val mTaskViewModel: TaskViewModel): RecyclerView.Adapt
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val currentTask = taskList[position]
-        holder.itemView.findViewById<TextView>(R.id.id_txt).text = currentTask.uid.toString()
         holder.itemView.findViewById<TextView>(R.id.taskName_txt).text = currentTask.name.toString()
         holder.itemView.findViewById<TextView>(R.id.priority_txt).text = "PRIO: ${currentTask.priority.toString()}"
         holder.itemView.findViewById<TextView>(R.id.percentageDone_txt).text = "${currentTask.percentageDone.toString()}%"
 
+        val myFormat = "dd/MM/yy"
+        val dateFormat = SimpleDateFormat(myFormat, Locale.US)
+        holder.itemView.findViewById<TextView>(R.id.tv_deadline).text = "Deadline: ${dateFormat.format(currentTask.deadline)}"
         holder.itemView.findViewById<ConstraintLayout>(R.id.cl_tasksList).setOnClickListener {
             val action = ListFragmentDirections.actionListFragmentToUpdateFragment(currentTask)
             holder.itemView.findNavController().navigate(action)
